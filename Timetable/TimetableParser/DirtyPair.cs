@@ -1,15 +1,18 @@
-﻿namespace TimetableParser
+﻿using System;
+using Entities;
+
+namespace TimetableParser
 {
-    public class BaseDirtyPair
+    public class DirtyPair
     {
-        public string GroupNumber { get; }
+        public string Group { get; }
         public string DayOfWeek { get; }
         public string Time { get; }
         public string Content { get; }
 
-        public BaseDirtyPair(string groupNumber, string time, string dayOfWeek, string content)
+        public DirtyPair(string group, string time, string dayOfWeek, string content)
         {
-            GroupNumber = groupNumber;
+            Group = group;
             Time = time;
             DayOfWeek = dayOfWeek;
             Content = content;

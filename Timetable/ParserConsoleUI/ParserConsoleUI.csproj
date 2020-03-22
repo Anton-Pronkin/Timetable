@@ -49,5 +49,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{3586CAE7-D0DE-48C5-9136-EA13D3670BA6}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimetableParser\TimetableParser.csproj">
+      <Project>{08D7DC84-CDB0-48F3-AFE8-4CF1C4B1E980}</Project>
+      <Name>TimetableParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

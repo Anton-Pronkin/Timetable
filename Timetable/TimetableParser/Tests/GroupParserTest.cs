@@ -1,56 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using NUnit.Framework;
+using TimetableParser.PairParsers;
 
-namespace Entities.Tests
+namespace TimetableParser.Tests
 {
     [TestFixture]
-    public class GroupTest
+    public class GroupParserTest
     {
         [Test]
-        [TestCaseSource(nameof(Create_NegativeTestCases))]
-        public Group Create(int year, int faculty, int specialty, bool isMaster = false)
+        [TestCaseSource(nameof(Parse_NegativeTestCases))]
+        [TestCaseSource(nameof(Parse_PositiveTestCases))]
+        public Group Parse(string group)
         {
-            return Group.Create(year, faculty, specialty, isMaster);
+            return GroupParser.Parse(group);
         }
 
-        public static IEnumerable<TestCaseData> Create_NegativeTestCases()
-        {
-            yield return new TestCaseData(-1, 0, 0, false)
-                .SetName("Исключение при передаче отрицательного года.")
-                .Throws(typeof(ArgumentOutOfRangeException));
-
-            yield return new TestCaseData(10, 0, 0, false)
-                .SetName("Исключение при передаче неверного года.")
-                .Throws(typeof(ArgumentOutOfRangeException));
-
-            yield return new TestCaseData(0, -1, 0, false)
-                .SetName("Исключение при передаче отрицательного факультета.")
-                .Throws(typeof(ArgumentOutOfRangeException));
-
-            yield return new TestCaseData(0, 10, 0, false)
-                .SetName("Исключение при передаче неверного факультета.")
-                .Throws(typeof(ArgumentOutOfRangeException));
-
-            yield return new TestCaseData(0, 0, -1, false)
-                .SetName("Исключение при передаче отрицательной специальности.")
-                .Throws(typeof(ArgumentOutOfRangeException));
-
-            yield return new TestCaseData(0, 0, 100, false)
-                .SetName("Исключение при передаче неверной специальности.")
-                .Throws(typeof(ArgumentOutOfRangeException));
-        }
-
-        [Test]
-        [TestCaseSource(nameof(ParseNegativeTestCases))]
-        [TestCaseSource(nameof(ParsePositiveTestCases))]
-        public Group Parse_Negative(string group)
-        {
-            return Group.Parse(group);
-        }
-
-        public static IEnumerable<TestCaseData> ParseNegativeTestCases()
+        public static IEnumerable<TestCaseData> Parse_NegativeTestCases()
         {
             // Основные исключения
             yield return new TestCaseData(null)
@@ -125,12 +92,14 @@ namespace Entities.Tests
                 .Throws(typeof(ArgumentOutOfRangeException));
         }
 
-        public static IEnumerable<TestCaseData> ParsePositiveTestCases()
+        public static IEnumerable<TestCaseData> Parse_PositiveTestCases()
         {
             yield return new TestCaseData("123").Returns(Group.Create(1, 2, 3));
             yield return new TestCaseData("2345").Returns(Group.Create(2, 3, 45));
             yield return new TestCaseData("234М").Returns(Group.Create(2, 3, 4, true));
+            yield return new TestCaseData("234м").Returns(Group.Create(2, 3, 4, true));
             yield return new TestCaseData("3456М").Returns(Group.Create(3, 4, 56, true));
+            yield return new TestCaseData("3456м").Returns(Group.Create(3, 4, 56, true));
         }
     }
 }

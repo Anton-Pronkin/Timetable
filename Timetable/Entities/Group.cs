@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 
 namespace Entities
 {
@@ -9,7 +8,9 @@ namespace Entities
         public int Faculty { get; }
         public int Specialty { get; }
         public bool IsMaster { get; }
-        public string Number => throw new NotImplementedException();
+
+        public const string MasterFlag = "М";
+        public string Number => $"{Year}{Faculty}{Specialty}{(IsMaster ? MasterFlag : string.Empty)}";
 
         private Group(int year, int faculty, int specialty, bool isMaster = false)
         {
@@ -39,41 +40,6 @@ namespace Entities
             return new Group(year, faculty, specialty, isMaster);
         }
 
-        public static Group Parse(string group)
-        {
-            if (group is null)
-            {
-                throw new ArgumentNullException(nameof(group));
-            }
-
-            switch (group.Length)
-            {
-                case 3:
-                    return ParseGroupWithThreeComponent(group);
-                case 4:
-                    return ParseGroupWithFourComponent(group);
-                case 5:
-                    return ParseGroupWithFifeComponent(group);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(group), "Неверное количество символов в названии группы.");
-            }
-        }
-
-        private static Group ParseGroupWithThreeComponent(string group)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Group ParseGroupWithFourComponent(string group)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Group ParseGroupWithFifeComponent(string group)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Equals(object obj)
         {
             if (obj is Group group)
@@ -94,15 +60,17 @@ namespace Entities
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                var hashCode = Year;
-                hashCode = (hashCode * 397) ^ Faculty;
-                hashCode = (hashCode * 397) ^ Specialty;
-                hashCode = (hashCode * 397) ^ IsMaster.GetHashCode();
+            var hashCode = Year;
+            hashCode = (hashCode * 397) ^ Faculty;
+            hashCode = (hashCode * 397) ^ Specialty;
+            hashCode = (hashCode * 397) ^ IsMaster.GetHashCode();
 
-                return hashCode;
-            }
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return Number;
         }
     }
 }
