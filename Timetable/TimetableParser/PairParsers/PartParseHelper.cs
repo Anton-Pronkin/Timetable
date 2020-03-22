@@ -30,6 +30,11 @@ namespace TimetableParser.PairParsers
             }
         }
 
+        public static bool CheckEntry(string text, string pattern)
+        {
+            return Regex.IsMatch(text, pattern, RegexOptions.IgnoreCase);
+        }
+
         public static string RemoveEntries(string text, params string[] substitutions)
         {
             return substitutions.Aggregate(text, (result, substitution) =>

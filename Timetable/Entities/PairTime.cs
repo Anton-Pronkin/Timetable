@@ -13,6 +13,10 @@ namespace Entities
             End = end;
         }
 
+        public PairTime(DateTime start, int hour = 2) : this(start, start.AddMinutes((45 + 45 + 5) * (hour / 2)))
+        {
+        }
+
         public override string ToString()
         {
             return $"{Start:hh:mm}-{End:hh:mm}";

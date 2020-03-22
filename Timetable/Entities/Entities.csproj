@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Group.cs" />
     <Compile Include="Pair.cs" />
+    <Compile Include="PairFrequency.cs" />
     <Compile Include="PairTime.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="Teacher.cs" />

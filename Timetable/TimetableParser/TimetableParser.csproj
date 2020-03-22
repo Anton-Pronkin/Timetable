@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="DirtyPair.cs" />
     <Compile Include="PairParsers\DayOfWeekParser.cs" />
+    <Compile Include="PairParsers\FrequencyParser.cs" />
     <Compile Include="PairParsers\PairParser.cs" />
     <Compile Include="DocxParser.cs" />
     <Compile Include="PairParsers\GroupParser.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="PairParsers\PairTypeParser.cs" />
     <Compile Include="PairParsers\TimeRangeParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedefinedTimeParser.cs" />
     <Compile Include="Tests\GroupParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
